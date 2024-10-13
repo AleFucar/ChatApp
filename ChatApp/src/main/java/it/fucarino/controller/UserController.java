@@ -23,13 +23,17 @@ public class UserController {
 	@Autowired
 	private UserRepository userRepository;
 
-	@GetMapping("/users")
-	public String users(Model model) {
+	
+	
+	@GetMapping("/index")
+	public String getUser(Model model) {
 		
 		List<User> user = userRepository.findAll();
 		model.addAttribute("user", user);
+		
 		return "/index";
 	}
+	
 	
 	
 	@GetMapping("/create")
@@ -42,6 +46,7 @@ public class UserController {
 	}
 	
 	
+	
 	@PostMapping("/create")
 	public String postCreateUser(@ModelAttribute("user") User userForm, Model model) {
 			
@@ -49,6 +54,7 @@ public class UserController {
 		
 		return "redirect:/index";
 	}
+	
 	
 	
 }

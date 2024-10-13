@@ -9,11 +9,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import it.fucarino.model.Message;
 import it.fucarino.model.User;
 import it.fucarino.repository.ChatRepository;
+import it.fucarino.repository.MessageRepository;
 import it.fucarino.repository.UserRepository;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -27,16 +30,18 @@ public class ChatController {
 	@Autowired
 	private UserRepository userRepository;
 	
+	@Autowired
+	private MessageRepository messageRepository;
 	
-	@GetMapping("/index")
-	public String getChat(Model model) {
+	
+	@GetMapping("/index/{id}")
+	public String getSingleChat(@PathVariable("id") Integer userId, Model model) {
 		
-		List<User> user = userRepository.findAll();
-		model.addAttribute("user", user);
+		model.addAttribute("userById", userRepository.getReferenceById(userId));
+		
 		
 		return "/index";
 	}
-	
 	
 	
 	
