@@ -66,11 +66,12 @@
       <div class="col-md-4 col-lg-3 p-0 chat-sidebar">
         <div class="p-3 border-bottom text-center">
           <h5>Chat</h5>
+		  <i class="bi bi-plus-circle-dotted"></i>
         </div>
         <div class="list-group list-group-flush">
-          <a th:each="user : ${user}" href="${user.getid}" class="list-group-item list-group-item-action">
+          <a th:each="user : ${user}" th:href="@{|/index/${user.id}|}" class="list-group-item list-group-item-action">
             <div class="d-flex align-items-center">
-              <img src="https://via.placeholder.com/40" class="rounded-circle me-3" alt="Avatar">
+              <img th:src="${user.profilePhoto}" class="rounded-circle me-3" width="50px" height="50px" alt="Avatar">
               <div>
                 <strong th:text="${user.getUsername}"></strong><br>
                 <small class="text-muted">Ciao! Come stai?</small>
@@ -83,34 +84,49 @@
       </div>
       
       <!-- Area di chat principale -->
-      <div class="col-md-8 col-lg-9 p-0 chat-area d-flex flex-column">
-        <!-- Header con il nome del contatto -->
-        <div class="p-3 border-bottom">
-          <h5 th:text="${userById.getUsername}"></h5>
+	 
+	 <div th:if="${id == null}" class="col-md-8 col-lg-9 p-0 chat-area d-flex justify-content-center align-items-center">
+	  <div class="card border-secondary mb-3" style="max-width: 20rem; height: 28%;">
+	    <div class="card-header text-center">ChatApp</div>
+	    <div class="card-body text-secondary">
+	      <h5 class="card-title text-center">Benvenuto su ChatApp!</h5>
+	      <p class="card- text-center">Manda e ricevi messaggi, se non hai una chat iniziata, clicca il pulsante qui sotto per iniziare una nuova conversazione!</p>
+		  <div class="d-grid gap-2 col-6 mx-auto">
+		  <a class="btn btn-primary mt-1" th:href="#" role="button">Chat</a>			
+		  </div>
+	    </div>
+	  </div>
+	 </div>
+	  
+	  
+      <div th:if="${id != null}" class="col-md-8 col-lg-9 p-0 chat-area d-flex flex-column">
+        <div class="p-3 border-bottom text-center">
+          <h5 th:text="${userById.username}"></h5>
         </div>
         
-        <!-- Area messaggi -->
-        <div class="flex-grow-1 message-area">
+
+        <div th:if="${id != null}" class="flex-grow-1 message-area">
           <div class="chat-bubble received">
             Ciao! Come stai?
           </div>
-          <div class="chat-bubble sent">
+          <div th:if="${id != null}" class="chat-bubble sent">
             Bene, grazie! E tu?
           </div>
-          <!-- Altri messaggi... -->
+
+		  
         </div>
-        
-        <!-- Input per scrivere messaggi -->
-        <div class="p-3 border-top">
-          <div class="input-group">
-            <input type="text" class="form-control message-input" placeholder="Scrivi un messaggio...">
-            <button class="btn btn-primary rounded-circle">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
-                <path d="M15.854 0.146a.5.5 0 0 0-.58-.087L1 7l5.216 1.686L9.83 15.419l7.853-14.178a.5.5 0 0 0-.087-.58L9.707 6.293l4.146-4.147a.5.5 0 0 0-.707-.707L9 5.586 2.707-.293a.5.5 0 0 0-.707.707l6.293 6.293L1.707 7.293l-1.272.396L.146.854z"/>
-              </svg>
-            </button>
-          </div>
-        </div>
+		
+
+		 <div th:if="${id != null}" class="p-3 border-top">
+		   <div class="input-group">
+		     <input type="text" class="form-control message-input" placeholder="Scrivi un messaggio...">
+		     <button class="btn btn-primary rounded-circle">
+		       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+		         <path d="M15.854 0.146a.5.5 0 0 0-.58-.087L1 7l5.216 1.686L9.83 15.419l7.853-14.178a.5.5 0 0 0-.087-.58L9.707 6.293l4.146-4.147a.5.5 0 0 0-.707-.707L9 5.586 2.707-.293a.5.5 0 0 0-.707.707l6.293 6.293L1.707 7.293l-1.272.396L.146.854z"/>
+		       </svg>
+		     </button>
+		   </div>
+		 </div>
       </div>
     </div>
   </div>

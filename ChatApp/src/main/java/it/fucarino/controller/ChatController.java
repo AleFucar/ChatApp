@@ -1,5 +1,7 @@
 package it.fucarino.controller;
 
+import java.awt.print.Printable;
+import java.io.Console;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,11 +37,14 @@ public class ChatController {
 	
 	
 	@GetMapping("/index/{id}")
-	public String getSingleChat(@PathVariable("id") Integer userId, Model model) {
+	public String getSingleChat(@PathVariable("id") Integer id, Model model) {
 		
-		model.addAttribute("userById", userRepository.getReferenceById(userId));
-		
-		
+		// Lista utenti cliccabili //
+		List<User> user = userRepository.findAll();
+		model.addAttribute("user", user);
+		model.addAttribute("id", id);
+		model.addAttribute("userById", userRepository.getReferenceById(id));
+
 		return "/index";
 	}
 	
