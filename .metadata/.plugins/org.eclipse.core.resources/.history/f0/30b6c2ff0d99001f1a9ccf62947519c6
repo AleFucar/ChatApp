@@ -1,0 +1,42 @@
+package it.fucarino.model;
+
+
+
+
+import org.antlr.v4.runtime.misc.NotNull;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
+public class Role {
+ 
+	 @Id
+	 private Integer id;
+	 
+	 @NotNull
+	 private String name;
+
+	 
+	 //	GETTER AND SETTER //
+	 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getUsername() {
+		return name;
+	}
+
+	public void setUsername(String username) {
+		this.name = username;
+	}
+	 
+	 
+	 
+	 
+}

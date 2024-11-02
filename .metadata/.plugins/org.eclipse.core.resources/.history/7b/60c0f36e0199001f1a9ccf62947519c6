@@ -1,0 +1,5 @@
+package it.fucarino.security;
+
+public class SecurityConfiguration {
+
+}

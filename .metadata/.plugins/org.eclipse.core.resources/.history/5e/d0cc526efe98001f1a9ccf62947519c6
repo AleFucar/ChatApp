@@ -1,0 +1,9 @@
+package it.fucarino.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import it.fucarino.model.Role;
+
+public interface RoleRepository extends JpaRepository<Role, Integer> {
+
+}
